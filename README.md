@@ -2,6 +2,9 @@
 
 
 
+Keymap compile status on CircleCI:..
+[![CircleCI](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci.svg?style=svg)](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci))
+
 
 ### Layer 0: QWERTY
 

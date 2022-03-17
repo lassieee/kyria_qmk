@@ -17,7 +17,7 @@ jobs:
             docker run -d --rm --name qmk qmkfm/qmk_firmware sleep 120;
             docker exec -it qmk qmk setup
             docker exec -it qmk qmk env
-            docker exec -it qmk mkdir /qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee
+            docker exec -it qmk mkdir -p /qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee
             for i in config.h keymap.c rules.mk; do
                 docker cp $i qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee/
             done
