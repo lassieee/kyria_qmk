@@ -4,8 +4,6 @@ jobs:
     working_directory: /app
     docker:
       - image: docker:20.10.12-git
-    environment:
-      KMFILE: "splitkb_kyria_rev1_lassieee.hex"
     steps:
       - checkout
       - setup_remote_docker
@@ -23,14 +21,14 @@ jobs:
                 docker cp $i qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee/
             done
             docker exec -it qmk qmk compile -kb splitkb/kyria -km lassieee
-            docker cp qmk:/qmk_firmware/${KMFILE} .
+            docker cp qmk:/qmk_firmware/splitkb_kyria_rev1_lassieee.hex .
             docker stop qmk
       - store_artifacts:
-          path: /app/${KMFILE}
+          path: /app/splitkb_kyria_rev1_lassieee.hex
       - persist_to_workspace:
           root: /app
           paths:
-            - ${KMFILE}
+            - splitkb_kyria_rev1_lassieee.hex
 
   publish:
     docker:
