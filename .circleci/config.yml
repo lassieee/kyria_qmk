@@ -1,0 +1,61 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: docker:20.10.12-git
+    environment:
+      KMFILE: "splitkb_kyria_rev1_lassieee.hex"
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Run QMK container and compile keymap
+          command: |
+            export
+            cd /app;
+            docker run -d --rm --name qmk qmkfm/qmk_firmware sleep 120;
+            docker exec -it qmk qmk setup
+            docker exec -it qmk qmk env
+            docker exec -it qmk mkdir /qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee
+            for i in config.h keymap.c rules.mk; do
+                docker cp $i qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee/
+            done
+            docker exec -it qmk qmk compile -kb splitkb/kyria -km lassieee
+            docker cp qmk:/qmk_firmware/${KMFILE} .
+            docker stop qmk
+      - store_artifacts:
+          path: /app/${KMFILE}
+      - persist_to_workspace:
+          root: /app
+          paths:
+            - ${KMFILE}
+
+  publish:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /app
+      - run:
+          name: "Publish release on GitHub"
+          command: |
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete $(git tag | sort -V | tail -1)  /app/splitkb_kyria_rev1_lassieee.hex
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - circleci
+      - publish:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+

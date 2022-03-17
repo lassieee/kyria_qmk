@@ -1,19 +1,31 @@
-# My custom kyria keymap
-
-This keymap is based on the default, with a few adjustments:  
-
-- encoder disabled to save space for future oled animation
-- added custom Wheel of Time image to secondary oled
-- removed music play button
-- removed Colemak-DH and Dvorac base layer
-- base layer: switched `tab` and `ctrl/esc` keys and removed `ctrl` from `ctrl/esc`
+## My Kyria QWERTY keymap
 
 
 
-The five different layers are as follows:  
-1. Base layer: QWERTY
-2. Navigation layer
-3. Symbols/Numbers layer
-4. Function layer
-5. Adjust layer
 
+### Layer 0: QWERTY
+
+![layer_0](https://i.imgur.com/F8gO4ih.png)
+
+
+### Layer 1: Navigation & Media
+
+![layer_1](https://i.imgur.com/Wfp3f5u.png)
+
+
+### Layer 2: Symbols & Numbers
+
+![layer_2](https://i.imgur.com/2959QV5.png)
+
+
+### Layer 3: Function Keys
+
+![layer_3](https://i.imgur.com/sUjClEC.png)
+
+
+
+QMK Docs:
+* https://docs.qmk.fm/
+
+Keyboard layout editor:
+* http://www.keyboard-layout-editor.com
