@@ -32,4 +32,4 @@
 // #define NO_USB_STARTUP_CHECK
 
 // how long before a tap becomes a hold. default 200
-#define TAPPING_TERM 300
+#define TAPPING_TERM 175
