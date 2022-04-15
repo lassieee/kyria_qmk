@@ -28,25 +28,26 @@ enum layers {
 enum {
   TD_LSHFT_LALT,
   TD_RSHFT_RALT,
+  TD_RGUI_ENT,
 };
 
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_LSHFT_LALT] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_LALT),
   [TD_RSHFT_RALT] = ACTION_TAP_DANCE_DOUBLE(KC_RSFT, KC_RALT),
+  [TD_RGUI_ENT] = ACTION_TAP_DANCE_DOUBLE(KC_RGUI, KC_ENT),
 };
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
-
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
 #define FKEYS    MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
 
-#define CTL_ESC  MT(MOD_LCTL, KC_ESC)
-#define CTL_MINS MT(MOD_RCTL, KC_MINUS)
-#define ALT_ENT  MT(MOD_LALT, KC_ENT)
+// #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
+// #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
+// #define ALT_ENT  MT(MOD_LALT, KC_ENT)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -54,22 +55,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * Base Layer: QWERTY
  *
- * ,--------------------------------------------------.                                                 ,-------------------------------------------------.
- * |  Esc   |   Q   |   W   |    E   |   R     |   T  |                                                 |   Y    |   U    |   I   |   O   |   P  |  Bksp  |
- * |--------+-------+-------+--------+---------+------|                                                 |--------+--------+-------+-------+------+--------|
- * |  Tab   |   A   |   S   |    D   |   F     |   G  |                                                 |   H    |   J    |   K   |   L   | ;  : |  ' "   |
- * |--------+-------+-------+--------+---------+------+-------+-------.                ,----------------+--------+--------+-------+-------+------+--------|
- * |        |   Z   |   X   |    C   |   V     |   B  |  [ {  |  Nav  |                |  Sym   |  ] }  |   N    |   M    | ,  <  | . >   | /  ? |   - _  |
- * '-----------------------------+------+------+------+-------|-------|                |--------+-------+--------+--------+-------+-----------------------'
- *                               |Adjust| LCtrl|LShft/| LGUI/ | Space |                |  RCtrl | RGUI/ | RShift/|        |F-keys |
- *                               |      |      | LAlt |       |       |                |        | Enter |  RALT  |        |       |
- *                               '------------------------------------'                '------------------------------------------'
+ * ,-----------------------------------------------.                                                 ,------------------------------------------------.
+ * |  Esc   |   Q   |   W   |    E   |   R  |   T  |                                                 |   Y    |   U  |    I   |   O   |   P  |  Bksp  |
+ * |--------+-------+-------+--------+------+------|                                                 |--------+------+--------+-------+------+--------|
+ * |  Tab   |   A   |   S   |    D   |   F  |   G  |                                                 |   H    |   J  |    K   |   L   | ;  : |  ' "   |
+ * |--------+-------+-------+--------+------+------+-------+-------.                ,----------------+--------+------+--------+-------+------+--------|
+ * | LShft  |   Z   |   X   |    C   |   V  |   B  |  [ {  |  Nav  |                |  RGUI  |  ] }  |   N    |   M  |  ,  <  | . >   | /  ? |   - _  |
+ * '-----------------------------+------+---+------+-------|-------|                |--------+-------+--------+------+--------+-----------------------'
+ *                            |Adjust| LAlt |LShft | Space/|  LGUI |                |  Sym   | Enter/| RShift | RALT | F-keys |
+ *                            |      |      |      | LCtrl |       |                |        | LCTL  |        |      |        |
+ *                            '------------------------------------'                '-----------------------------------------'
  */
     [_QWERTY] = LAYOUT(
      KC_ESC,  KC_Q,  KC_W,  KC_E,  KC_R,  KC_T,                                                        KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_BSPC,
-     MT(MOD_LSFT,KC_TAB), KC_A, KC_S, KC_D, KC_F, KC_G,                                                KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOTE,
-     _______, KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,  KC_LBRC,  _______,                     FKEYS, KC_RBRC, KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_MINS,
-                        ADJUST, KC_LCTL, TD(TD_LSHFT_LALT), MT(MOD_LGUI,KC_SPC), LT(NAV,KC_ENT),  LT(SYM,KC_ENT), MT(MOD_RGUI,KC_SPC), TD(TD_RSHFT_RALT), KC_RCTL, _______
+     KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G,                                                             KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOTE,
+     KC_LSFT, KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,  KC_LBRC,  NAV,                         KC_RGUI, KC_RBRC, KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_MINS,
+                        ADJUST, KC_LALT, KC_LSFT, MT(MOD_LCTL,KC_SPACE), KC_LGUI,       SYM, MT(MOD_LCTL,KC_ENT), KC_RSFT, KC_RALT, FKEYS
     ),
 
 /*
