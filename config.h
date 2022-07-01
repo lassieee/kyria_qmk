@@ -31,5 +31,8 @@
 // #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
 
-// how long before a tap becomes a hold. default 200
+// How long before a tap becomes a hold. default 200
 #define TAPPING_TERM 175
+
+// When using less than 8 layers
+#define LAYER_STATE_8BIT

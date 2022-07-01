@@ -8,7 +8,7 @@ Keymap compile status on CircleCI:
 
 ### Layer 0: QWERTY
 
-![layer_0](https://i.imgur.com/04sT74Q.png)
+![layer_0](https://i.imgur.com/CHrpFsV.png)
 
 
 ### Layer 1: Navigation & Media
@@ -18,12 +18,12 @@ Keymap compile status on CircleCI:
 
 ### Layer 2: Symbols & Numbers
 
-![layer_2](https://i.imgur.com/2959QV5.png)
+![layer_2](https://i.imgur.com/KUBjUkj.png)
 
 
 ### Layer 3: Function Keys
 
-![layer_3](https://i.imgur.com/B1b4bGD.png)
+![layer_3](https://i.imgur.com/8TXUfgY.png)
 
 
 
