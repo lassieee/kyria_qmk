@@ -49,8 +49,8 @@ enum {
 td_state_t cur_dance(qk_tap_dance_state_t *state);
 
 // Functions associated with individual tap dances
-void ql_finished(qk_tap_dance_state_t *state, void *user_data);
-void ql_reset(qk_tap_dance_state_t *state, void *user_data);
+void ent_sym_finished(qk_tap_dance_state_t *state, void *user_data);
+void ent_sym_reset(qk_tap_dance_state_t *state, void *user_data);
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
@@ -133,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer: Function keys
  *
  * ,-------------------------------------------.                                                     ,-------------------------------------------.
- * |        |  F9  | F10  | F11  | F12  |      |                                                     |      |      |      |      |      | RESET  |
+ * |        |  F9  | F10  | F11  | F12  |      |                                                     |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|                                                     |------+------+------+------+------+--------|
  * |        |  F5  |  F6  |  F7  |  F8  |      |                                                     |      | Shift| Ctrl |  Alt |  GUI |        |
  * |--------+------+------+------+------+------+-------------.                         ,-------------+------+------+------+------+------+--------|
@@ -144,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        '----------------------------------'                         '----------------------------------'
  */
     [_FUNCTION] = LAYOUT(
-      _______,  KC_F9,  KC_F10, KC_F11, KC_F12,    _______,                                                       _______, _______, _______, _______, _______, RESET,
+      _______,  KC_F9,  KC_F10, KC_F11, KC_F12,    _______,                                                       _______, _______, _______, _______, _______, _______,
       _______,  KC_F5,   KC_F6,   KC_F7,   KC_F8,  _______,                                                       _______, KC_RSFT, KC_RCTL, KC_LALT, KC_RGUI, _______,
       _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,  _______, _______,                   _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                  _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______
@@ -182,16 +182,20 @@ td_state_t cur_dance(qk_tap_dance_state_t *state) {
 }
 
 // Initialize tap structure associated with example tap dance key
-static td_tap_t ql_tap_state = {
+static td_tap_t ent_sym_tap_state = {
     .is_press_action = true,
     .state = TD_NONE
 };
 
 // Functions that control what our tap dance key does
-void ql_finished(qk_tap_dance_state_t *state, void *user_data) {
-    ql_tap_state.state = cur_dance(state);
-    switch (ql_tap_state.state) {
+void ent_sym_finished(qk_tap_dance_state_t *state, void *user_data) {
+    ent_sym_tap_state.state = cur_dance(state);
+    switch (ent_sym_tap_state.state) {
         case TD_SINGLE_TAP:
+            tap_code(KC_ENT);
+            break;
+        case TD_DOUBLE_TAP:
+            tap_code(KC_ENT);
             tap_code(KC_ENT);
             break;
         case TD_SINGLE_HOLD:
@@ -209,20 +213,23 @@ void ql_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void ql_reset(qk_tap_dance_state_t *state, void *user_data) {
+void ent_sym_reset(qk_tap_dance_state_t *state, void *user_data) {
     // If the key was held down and now is released then switch off the layer
-    if (ql_tap_state.state == TD_SINGLE_HOLD) {
+    if (ent_sym_tap_state.state == TD_SINGLE_HOLD) {
         layer_off(_SYM);
     }
-    if (ql_tap_state.state == TD_SINGLE_TAP) {
+    if (ent_sym_tap_state.state == TD_SINGLE_TAP) {
         unregister_code16(KC_ENT);
     }
-    ql_tap_state.state = TD_NONE;
+    if (ent_sym_tap_state.state == TD_DOUBLE_TAP) {
+        unregister_code16(KC_ENT);
+    }
+    ent_sym_tap_state.state = TD_NONE;
 }
 
 // Associate our tap dance key with its functionality
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ql_finished, ql_reset, 275),
+    [ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ent_sym_finished, ent_sym_reset, 100), // override default tapping term
     [LGUI_LCTL] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LCTL),
     [LCTL_LGUI] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_LGUI),
 };
