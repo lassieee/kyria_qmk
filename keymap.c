@@ -229,7 +229,7 @@ void ent_sym_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 // Associate our tap dance key with its functionality
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ent_sym_finished, ent_sym_reset, 100), // override default tapping term
+    [ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ent_sym_finished, ent_sym_reset, 150), // override default tapping term
     [LGUI_LCTL] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LCTL),
     [LCTL_LGUI] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_LGUI),
 };
