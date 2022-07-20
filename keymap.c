@@ -13,16 +13,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include QMK_KEYBOARD_H
 
-// Layers
-enum layers {
-    _QWERTY = 0,
-    _NAV,
-    _SYM,
-    _FUNCTION,
-    _ADJUST,
-};
+#include "keycodes.h"
+
+#ifdef OLED_ENABLE
+#    include "oled_utils.h"
+#endif
 
 // Define a type for as many tap dance states as you need
 typedef enum {
@@ -51,16 +49,6 @@ td_state_t cur_dance(qk_tap_dance_state_t *state);
 // Functions associated with individual tap dances
 void ent_sym_finished(qk_tap_dance_state_t *state, void *user_data);
 void ent_sym_reset(qk_tap_dance_state_t *state, void *user_data);
-
-// Aliases for readability
-#define QWERTY   DF(_QWERTY)
-#define SYM      MO(_SYM)
-#define NAV      MO(_NAV)
-#define FKEYS    MO(_FUNCTION)
-#define ADJUST   MO(_ADJUST)
-
-// #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
-// #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -167,10 +155,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT(
       _______, _______, _______,  QWERTY, _______, _______,                                              _______, _______, _______, _______,  _______, _______,
       _______, _______, _______, _______, _______, _______,                                              RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
-      _______, _______, _______, _______, _______, _______,_______, _______,           _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
+      _______, _______, _______, _______, _______, _______,_______, _______,           _______, _______, RGB_TOG, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
                                  _______, _______, _______,_______, _______,           _______, _______, _______, _______, _______
     ),
 };
+// clang-format on
+
+#ifdef OLED_ENABLE
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+  return OLED_ROTATION_180;
+}
+
+bool oled_task_user(void) {
+    render_status();
+    return false;
+}
+#endif
+
+#ifdef ENCODER_ENABLE
+bool encoder_update_user(uint8_t index, bool clockwise) {
+
+    if (index == 0) {
+        // Volume control
+        if (clockwise) {
+            tap_code(KC_VOLU);
+        } else {
+            tap_code(KC_VOLD);
+        }
+    } else if (index == 1) {
+        // Page up/Page down
+        if (clockwise) {
+            tap_code(KC_PGDN);
+        } else {
+            tap_code(KC_PGUP);
+        }
+    }
+    return false;
+}
+#endif
 
 // Determine the current tap dance state
 td_state_t cur_dance(qk_tap_dance_state_t *state) {
@@ -229,7 +251,7 @@ void ent_sym_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 // Associate our tap dance key with its functionality
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ent_sym_finished, ent_sym_reset, 150), // override default tapping term
+    [ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ent_sym_finished, ent_sym_reset, 100), // override default tapping term
     [LGUI_LCTL] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LCTL),
     [LCTL_LGUI] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_LGUI),
 };
