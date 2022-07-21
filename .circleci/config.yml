@@ -15,20 +15,20 @@ jobs:
             docker run -d --rm --name qmk qmkfm/qmk_firmware sleep 120;
             docker exec -it qmk qmk setup
             docker exec -it qmk qmk env
-            docker cp kyria qmk:qmk_firmware/keyboards/splitkb
             docker exec -it qmk mkdir -p /qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee
+            docker cp kyria qmk:qmk_firmware/keyboards/splitkb
             for i in config.h keymap.c rules.mk encoder_utils.c encoder_utils.h keycodes.h oled_utils.c oled_utils.h; do
                 docker cp $i qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee/
             done
-            docker exec -it qmk qmk compile -kb splitkb/kyria -km lassieee
+            docker exec -it qmk qmk compile -kb splitkb/kyria/rev2 -km lassieee
             docker cp qmk:/qmk_firmware/splitkb_kyria_rev2_lassieee.hex .
             docker stop qmk
       - store_artifacts:
-          path: /app/splitkb_kyria_rev1_lassieee.hex
+          path: /app/splitkb_kyria_rev2_lassieee.hex
       - persist_to_workspace:
           root: /app
           paths:
-            - splitkb_kyria_rev1_lassieee.hex
+            - splitkb_kyria_rev2_lassieee.hex
 
   publish:
     docker:
@@ -40,7 +40,7 @@ jobs:
       - run:
           name: "Publish release on GitHub"
           command: |
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete $(git tag | sort -V | tail -1)  /app/splitkb_kyria_rev1_lassieee.hex
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete $(git tag | sort -V | tail -1)  /app/splitkb_kyria_rev2_lassieee.hex
 
 workflows:
   version: 2
