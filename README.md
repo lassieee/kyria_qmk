@@ -32,3 +32,6 @@ QMK Docs:
 
 Keyboard layout editor:
 * http://www.keyboard-layout-editor.com
+
+Convert image to byte array for OLED display:
+* https://javl.github.io/image2cpp/

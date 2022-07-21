@@ -20,12 +20,7 @@ jobs:
             docker exec -it qmk python3 -m pip install qmk
             docker exec -it qmk qmk setup -y
             docker exec -it qmk qmk env
-            docker exec -it qmk mkdir -p /qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee
-            docker cp kyria qmk:qmk_firmware/keyboards/splitkb
-            #for i in config.h keymap.c rules.mk encoder_utils.c encoder_utils.h keycodes.h oled_utils.c oled_utils.h; do
-            for i in $(ls | egrep -v 'kyria|README.md'); do
-                docker cp $i qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee/
-            done
+            docker cp lassieee qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps/
             docker exec -it qmk qmk compile -kb splitkb/kyria/<< parameters.revision>> -km lassieee
             docker cp qmk:/qmk_firmware/splitkb_kyria_<< parameters.revision >>_lassieee.hex .
             docker stop qmk
