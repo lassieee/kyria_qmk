@@ -1,4 +1,4 @@
-## My Kyria QWERTY keymap
+## My Kyria Rev2.1 QWERTY keymap
 
 
 
