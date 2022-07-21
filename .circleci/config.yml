@@ -17,11 +17,11 @@ jobs:
             docker exec -it qmk qmk env
             docker cp kyria qmk:qmk_firmware/keyboards/splitkb
             docker exec -it qmk mkdir -p /qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee
-            for i in config.h keymap.c rules.mk; do
+            for i in config.h keymap.c rules.mk encoder_utils.c encoder_utils.h keycodes.h oled_utils.c oled_utils.h; do
                 docker cp $i qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee/
             done
             docker exec -it qmk qmk compile -kb splitkb/kyria -km lassieee
-            docker cp qmk:/qmk_firmware/splitkb_kyria_rev1_lassieee.hex .
+            docker cp qmk:/qmk_firmware/splitkb_kyria_rev2_lassieee.hex .
             docker stop qmk
       - store_artifacts:
           path: /app/splitkb_kyria_rev1_lassieee.hex
