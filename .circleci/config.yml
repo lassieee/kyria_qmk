@@ -12,7 +12,8 @@ jobs:
           command: |
             export
             cd /app;
-            docker run -d --rm --name qmk qmkfm/qmk_firmware sleep 120;
+            #docker run -d --rm --name qmk qmkfm/qmk_firmware sleep 120;
+            docker run -d --rm --name qmk jonz94/qmk_firmware sleep 120;
             docker exec -it qmk qmk setup
             docker exec -it qmk qmk env
             docker exec -it qmk mkdir -p /qmk_firmware/keyboards/splitkb/kyria/keymaps/lassieee
