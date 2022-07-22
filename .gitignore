@@ -4,3 +4,6 @@
 
 # mac os
 .DS_Store
+
+# compiled firmware
+.hex
