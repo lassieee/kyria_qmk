@@ -18,7 +18,7 @@
 
 #ifdef OLED_ENABLE
 #    define OLED_DISPLAY_128X64
-//#    define OLED_TIMEOUT 10000
+#    define OLED_TIMEOUT 60000
 #endif
 
 #ifdef RGBLIGHT_ENABLE
