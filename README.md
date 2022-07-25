@@ -5,6 +5,8 @@
 Keymap compile status on CircleCI:  
 [![CircleCI](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci.svg?style=svg)](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci)
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 
 ### Layer 0: QWERTY
 
