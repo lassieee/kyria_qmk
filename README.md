@@ -2,10 +2,7 @@
 
 
 
-Keymap compile status on CircleCI:  
-[![build](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci.svg?style=shield)](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci)
 [![circleci](https://img.shields.io/circleci/build/gh/lassieee/kyria_qmk/circleci?style=flat)](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci)
-
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
