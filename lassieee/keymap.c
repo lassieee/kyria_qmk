@@ -40,6 +40,8 @@ typedef struct {
 enum {
   LGUI_LCTL,
   LCTL_LGUI,
+  LSFT_LALT,
+  RSFT_RALT,
   ENT_SYM
 };
 
@@ -63,8 +65,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+-------+-------+--------+------+------+-------+-------.                 ,----------------+--------+------+--------+-------+------+--------|
  * | LShft  |   Z   |   X   |    C   |   V  |   B  |       |       |                 |        |       |   N    |   M  |  ,  <  | . >   | /  ? |   - _  |
  * '-----------------------------+------+---+------+-------|-------|                 |--------+-------+--------+------+--------+-----------------------'
- *                            |Adjust| LAlt |LShft | Space | LGUI/ |                 |  LCTL/ | Enter/| RShift | RALT | F-keys |
- *                            |      |      |      |       | LCTL  |                 |  LGUI  | SYM   |        |      |        |
+ *                            |Adjust|      |LShft/| Space | LGUI/ |                 |  LCTL/ | Enter/| RShft/ |      | F-keys |
+ *                            |      |      | LALT |       | LCTL  |                 |  LGUI  | SYM   |  RALT  |      |        |
  *                            '------------------------------------'                 '-----------------------------------------'
  */
 
@@ -72,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC,  KC_Q, KC_W, KC_E, KC_R, KC_T,                                                            KC_Y,  KC_U,   KC_I,    KC_O,   KC_P,    KC_BSPC,
      LT(NAV,KC_TAB),  KC_A, KC_S, KC_D, KC_F, KC_G,                                                    KC_H,  KC_J,   KC_K,    KC_L,   KC_SCLN, KC_QUOTE,
      KC_LSFT,  KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,  _______,  _______,                 _______, _______, KC_N,  KC_M,   KC_COMM, KC_DOT, KC_SLSH, KC_MINS,
-                  ADJUST, KC_LALT, KC_LSFT, KC_SPACE, TD(LGUI_LCTL),                 TD(LCTL_LGUI), TD(ENT_SYM), KC_RSFT, KC_RALT, FKEYS
+                  ADJUST, _______, TD(LSFT_LALT), KC_SPACE, TD(LGUI_LCTL),                 TD(LCTL_LGUI), TD(ENT_SYM), TD(RSFT_RALT), _______, FKEYS
     ),
 
 /*
@@ -256,4 +258,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ent_sym_finished, ent_sym_reset),
     [LGUI_LCTL] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LCTL),
     [LCTL_LGUI] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_LGUI),
+    [LSFT_LALT] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_LALT),
+    [RSFT_RALT] = ACTION_TAP_DANCE_DOUBLE(KC_RSFT, KC_RALT)
 };

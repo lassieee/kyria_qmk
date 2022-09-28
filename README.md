@@ -8,12 +8,12 @@
 
 ### Layer 0: QWERTY
 
-![layer_0](https://i.imgur.com/iz8QS6G.png)
+![layer_0](https://i.imgur.com/iHPdR6Q.jpg)
 
 
 ### Layer 1: Navigation & Media
 
-![layer_1](https://i.imgur.com/6J20bwe.png)
+![layer_1](https://i.imgur.com/I84KfkC.jpg)
 
 
 ### Layer 2: Symbols & Numbers
