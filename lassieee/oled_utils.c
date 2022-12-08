@@ -13,20 +13,38 @@ void render_layer(void) {
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state|default_layer_state)) {
-        case _QWERTY:
-            oled_write_P(PSTR("QWERTY\n"), false);
+        case _QWERTY0:
+            oled_write_P(PSTR("QWERTY\n\n"), false);
+            render_qmk_logo();
+            oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
             break;
-        case _NAV:
-            oled_write_P(PSTR("Nav\n"), false);
+        case _SYM1:
+            //oled_write_P(PSTR("Sym1\n"), false);
+            oled_write_P(PSTR("Symbols 1\n\n"
+                  "1 2 3 4 5 - 6 7 8 9 0\n"
+                  "! @ # $ % - ^ & * ( )\n"
+                  "` : ; - [ - ] ' |.."), false);
             break;
-        case _SYM:
-            oled_write_P(PSTR("Sym\n"), false);
+        case _SYM2:
+            oled_write_P(PSTR("Symbols 2\n\n"
+                  "ESC ` ... - .... Bksp\n"
+                  "TAB ~ ... - . : '. +\n\n"
+                  "../.. - . ; \\ | =\n"), false);
             break;
-        case _FUNCTION:
-            oled_write_P(PSTR("Function\n"), false);
+        case _NAV3:
+            oled_write_P(PSTR("Navigation\n\n"), false);
+            render_qmk_logo();
+            oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
             break;
-        case _ADJUST:
+        case _FKEYS4:
+            oled_write_P(PSTR("F-keys\n\n"), false);
+            render_qmk_logo();
+            oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
+            break;
+        case _ADJUST5:
             oled_write_P(PSTR("Adjust\n"), false);
+            render_qmk_logo();
+            oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
             break;
         default:
             oled_write_P(PSTR("Undefined\n"), false);
@@ -246,8 +264,8 @@ void render_status(void) {
         oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("       "), false);
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
         // QMK Logo and version information
-        render_qmk_logo();
-        oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
+//        render_qmk_logo();
+//        oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
     } else {
         // custom Logo
         k8s_logo();
