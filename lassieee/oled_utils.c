@@ -14,35 +14,35 @@ void render_layer(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state|default_layer_state)) {
         case _L0:
-            oled_write_P(PSTR("QWERTY\n\n"), false);
+            oled_write_P(PSTR("L0: QWERTY\n\n"), false);
             render_qmk_logo();
             oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
             break;
         case _L1:
             //oled_write_P(PSTR("Symbols 1\n"), false);
-            oled_write_P(PSTR("Symbols 1\n\n"
+            oled_write_P(PSTR("L1: Symbols\n\n"
                   "1 2 3 4 5 - 6 7 8 9 0\n"
                   "! @ # $ % - ^ & * ( )\n"
                   "` : ; - [ - ] ' |.."), false);
             break;
         case _L2:
-            oled_write_P(PSTR("Symbols 2\n\n"
+            oled_write_P(PSTR("L2: Symbols\n\n"
                   "ESC ` ... - .... Bksp\n"
                   "TAB ~ ... - . : '. +\n\n"
                   "../.. - . ; \\ | =\n"), false);
             break;
         case _L3:
-            oled_write_P(PSTR("Navigation\n\n"), false);
+            oled_write_P(PSTR("L3: Navigation\n\n"), false);
             render_qmk_logo();
             oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
             break;
         case _L4:
-            oled_write_P(PSTR("F-keys\n\n"), false);
+            oled_write_P(PSTR("l$: F-keys\n\n"), false);
             render_qmk_logo();
             oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
             break;
         case _L5:
-            oled_write_P(PSTR("Adjust\n"), false);
+            oled_write_P(PSTR("L5: Adjust\n"), false);
             render_qmk_logo();
             oled_write_P(PSTR("\n      Kyria v2.1\n"), false);
             break;
