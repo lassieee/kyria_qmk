@@ -13,19 +13,19 @@ void render_layer(void) {
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state|default_layer_state)) {
-        case _QWERTY:
+        case _L0:
             oled_write_P(PSTR("QWERTY\n"), false);
             break;
-        case _NAV:
+        case _L2:
             oled_write_P(PSTR("Nav\n"), false);
             break;
-        case _SYM:
+        case _L1:
             oled_write_P(PSTR("Sym\n"), false);
             break;
-        case _FUNCTION:
+        case _L3:
             oled_write_P(PSTR("Function\n"), false);
             break;
-        case _ADJUST:
+        case _L4:
             oled_write_P(PSTR("Adjust\n"), false);
             break;
         default:

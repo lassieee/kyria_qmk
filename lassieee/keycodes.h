@@ -3,16 +3,16 @@
 #include "quantum.h"
 
 enum layers {
-    _QWERTY = 0,
-    _NAV,
-    _SYM,
-    _FUNCTION,
-    _ADJUST,
+    _L0 = 0,
+    _L1,
+    _L2,
+    _L3,
+    _L4,
 };
 
-#define QWERTY   DF(_QWERTY)
-#define SYM      MO(_SYM)
-#define NAV      MO(_NAV)
-#define FKEYS    MO(_FUNCTION)
-#define ADJUST   MO(_ADJUST)
+#define L0   DF(_L0)
+#define L1      MO(_L1)
+#define L2      MO(_L2)
+#define L3    MO(_L3)
+#define L4   MO(_L4)
 

@@ -42,64 +42,43 @@ enum {
   LCTL_LGUI,
   LSFT_LALT,
   RSFT_RALT,
-  ENT_SYM
+  ENT_L1
 };
 
 // Function associated with all tap dances
 td_state_t cur_dance(qk_tap_dance_state_t *state);
 
 // Functions associated with individual tap dances
-void ent_sym_finished(qk_tap_dance_state_t *state, void *user_data);
-void ent_sym_reset(qk_tap_dance_state_t *state, void *user_data);
+void ent_l1_finished(qk_tap_dance_state_t *state, void *user_data);
+void ent_l1_reset(qk_tap_dance_state_t *state, void *user_data);
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /*
- * Base Layer: QWERTY
+ * L0 - Base Layer: QWERTY
  *
  * ,-----------------------------------------------.                                                  ,------------------------------------------------.
  * |  Esc   |   Q   |   W   |    E   |   R  |   T  |                                                  |   Y    |   U  |    I   |   O   |   P  |  Bksp  |
  * |--------+-------+-------+--------+------+------|                                                  |--------+------+--------+-------+------+--------|
- * | Tab/Nav|   A   |   S   |    D   |   F  |   G  |                                                  |   H    |   J  |    K   |   L   | ;  : |  ' "   |
+ * | Tab/L2 |   A   |   S   |    D   |   F  |   G  |                                                  |   H    |   J  |    K   |   L   | ;  : |  ' "   |
  * |--------+-------+-------+--------+------+------+-------+-------.                 ,----------------+--------+------+--------+-------+------+--------|
  * | LShft  |   Z   |   X   |    C   |   V  |   B  |       |       |                 |        |       |   N    |   M  |  ,  <  | . >   | /  ? |   - _  |
  * '-----------------------------+------+---+------+-------|-------|                 |--------+-------+--------+------+--------+-----------------------'
- *                            |Adjust|      |LShft/| Space | LGUI/ |                 |  LCTL/ | Enter/| RShft/ |      | F-keys |
- *                            |      |      | LALT |       | LCTL  |                 |  LGUI  | SYM   |  RALT  |      |        |
+ *                            |  L4  |      |LShft/| Space | LGUI/ |                 |  LCTL/ | Enter/| RShft/ |      |  L3    |
+ *                            |      |      | LALT |       | LCTL  |                 |  LGUI  |  L1   |  RALT  |      |        |
  *                            '------------------------------------'                 '-----------------------------------------'
  */
 
-    [_QWERTY] = LAYOUT(
+    [_L0] = LAYOUT(
      KC_ESC,  KC_Q, KC_W, KC_E, KC_R, KC_T,                                                            KC_Y,  KC_U,   KC_I,    KC_O,   KC_P,    KC_BSPC,
-     LT(NAV,KC_TAB),  KC_A, KC_S, KC_D, KC_F, KC_G,                                                    KC_H,  KC_J,   KC_K,    KC_L,   KC_SCLN, KC_QUOTE,
+     LT(L2,KC_TAB),  KC_A, KC_S, KC_D, KC_F, KC_G,                                                    KC_H,  KC_J,   KC_K,    KC_L,   KC_SCLN, KC_QUOTE,
      KC_LSFT,  KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,  _______,  _______,                 _______, _______, KC_N,  KC_M,   KC_COMM, KC_DOT, KC_SLSH, KC_MINS,
-                  ADJUST, _______, TD(LSFT_LALT), KC_SPACE, TD(LGUI_LCTL),                 TD(LCTL_LGUI), TD(ENT_SYM), TD(RSFT_RALT), _______, FKEYS
+                L4, _______, TD(LSFT_LALT), KC_SPACE, TD(LGUI_LCTL),                 TD(LCTL_LGUI), TD(ENT_L1), TD(RSFT_RALT), _______, L3
     ),
 
 /*
- * Nav Layer: Media, navigation
- *
- * ,-------------------------------------------.                                                     ,-------------------------------------------.
- * |  RESET |      |      |      |scrnsht|     |                                                     | PgUp | Home |   ↑  | End  | VolUp| Delete |
- * |--------+------+------+------+------+------|                                                     |------+------+------+------+------+--------|
- * |        |  GUI |  Alt | Ctrl | Shift|      |                                                     | PgDn |  ←   |   ↓  |   →  | VolDn| Insert |
- * |--------+------+------+------+------+------+-------------.                         ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |ScLck |                         |      |      | Pause|M Prev|      |M Next|VolMut| PrtSc  |
- * '----------------------+------+------+------+------+------|                         |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |                         |      |      |      |      |      |
- *                        |      |      |      |      |      |                         |      |      |      |      |      |
- *                        `----------------------------------'                         '----------------------------------'
- */
-    [_NAV] = LAYOUT(
-      RESET,   _______, _______, _______, LSG(KC_4), _______,                                            KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_VOLU, KC_DEL,
-      _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,                                              KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, KC_INS,
-      _______, _______, _______, _______, _______, _______, _______, KC_SLCK,          _______, _______,KC_PAUSE, KC_MPRV, _______, KC_MNXT, KC_MUTE, KC_PSCR,
-                                 _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______
-    ),
-
-/*
- * Sym Layer: Numbers and symbols
+ * L1 - Sym Layer: Numbers and symbols
  *
  * ,-------------------------------------------.                                                     ,-------------------------------------------.
  * |    `   |  1   |  2   |  3   |  4   |  5   |                                                     |   6  |  7   |  8   |  9   |  0   |   =    |
@@ -108,11 +87,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.                         ,-------------+------+------+------+------+------+--------|
  * |    |   |   \  |  :   |  ;   |  -   |  [   |      |      |                         |      |      |   ]  |  _   |  ,   |  .   |  /   |   ?    |
  * '----------------------+------+------+------+------+------|                         |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |                         |      |      |      |      |      |
- *                        |      |      |      |      |      |                         |      |      |      |      |      |
+ *                        |  L4  |      |LShft/| Space|LGUI/ |                         | LCTL/|Enter/|RShft/|      |  L3  |
+ *                        |      |      | LALT |      |LCTL  |                         | LGUI | L1   | RALT |      |      |
  *                        '----------------------------------'                         '----------------------------------'
  */
-    [_SYM] = LAYOUT(
+    [_L1] = LAYOUT(
      KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_EQL,
      KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                               KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PLUS,
      KC_PIPE, KC_BSLS, KC_COLN, KC_SCLN, KC_MINS, KC_LBRC, _______, _______,           _______, _______, KC_RBRC, KC_UNDS, KC_COMM,  KC_DOT, KC_SLSH, KC_QUES,
@@ -120,7 +99,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 /*
- * Function Layer: Function keys
+ * L2 - Nav Layer: Media, navigation
+ *
+ * ,-------------------------------------------.                                                     ,-------------------------------------------.
+ * |  RESET |      |      |      |scrnsht|     |                                                     | PgUp | Home |   ↑  | End  | VolUp| Delete |
+ * |--------+------+------+------+------+------|                                                     |------+------+------+------+------+--------|
+ * |        |  GUI |  Alt | Ctrl | Shift|      |                                                     | PgDn |  ←   |   ↓  |   →  | VolDn| Insert |
+ * |--------+------+------+------+------+------+-------------.                         ,-------------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |ScLck |                         |      |      | Pause|M Prev|      |M Next|VolMut| PrtSc  |
+ * '----------------------+------+------+------+------+------|                         |------+------+------+------+------+----------------------'
+ *                        |  L4  |      |LShft/| Space|LGUI/ |                         | LCTL/|Enter/|RShft/|      |  L3  |
+ *                        |      |      | LALT |      |LCTL  |                         | LGUI | L1   | RALT |      |      |
+ *                        '----------------------------------'                         '----------------------------------'
+ */
+    [_L2] = LAYOUT(
+      RESET,   _______, _______, _______, LSG(KC_4), _______,                                            KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_VOLU, KC_DEL,
+      _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,                                              KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, KC_INS,
+      _______, _______, _______, _______, _______, _______, _______, KC_SLCK,          _______, _______,KC_PAUSE, KC_MPRV, _______, KC_MNXT, KC_MUTE, KC_PSCR,
+                                 _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______
+    ),
+
+/*
+ * L3 - Function Layer: Function keys
  *
  * ,-------------------------------------------.                                                     ,-------------------------------------------.
  * |        |  F9  | F10  | F11  | F12  |      |                                                     |      |      |      |      |      |        |
@@ -129,11 +129,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.                         ,-------------+------+------+------+------+------+--------|
  * |        |  F1  |  F2  |  F3  |  F4  |      |      |      |                         |      |      |      |      |      |      |      |        |
  * '----------------------+------+------+------+------+------|                         |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |                         |      |      |      |      |      |
- *                        |      |      |      |      |      |                         |      |      |      |      |      |
+ *                        |  L4  |      |LShft/| Space|LGUI/ |                         | LCTL/|Enter/|RShft/|      |  L3  |
+ *                        |      |      | LALT |      |LCTL  |                         | LGUI | L1   | RALT |      |      |
  *                        '----------------------------------'                         '----------------------------------'
  */
-    [_FUNCTION] = LAYOUT(
+    [_L3] = LAYOUT(
       _______,  KC_F9,  KC_F10, KC_F11, KC_F12,    _______,                                                       _______, _______, _______, _______, _______, _______,
       _______,  KC_F5,   KC_F6,   KC_F7,   KC_F8,  _______,                                                       _______, KC_RSFT, KC_RCTL, KC_LALT, KC_RGUI, _______,
       _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,  _______, _______,                   _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -141,21 +141,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 /*
- * Adjust Layer: Default layer settings, RGB
+ * L4 - Adjust Layer: Default layer settings, RGB
  *
  * ,-------------------------------------------.                                                     ,-------------------------------------------.
- * |        |      |      |QWERTY|      |      |                                                     |      |      |      |      |      |        |
+ * |        |      |      | L0   |      |      |                                                     |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|                                                     |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |                                                     | TOG  | SAI  | HUI  | VAI  | MOD  |        |
  * |--------+------+------+------+------+------+-------------.                         ,-------------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |      |                         |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
  * `----------------------+------+------+------+------+------|                         |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |                         |      |      |      |      |      |
- *                        |      |      |      |      |      |                         |      |      |      |      |      |
- *                        `----------------------------------'                         `----------------------------------'
+ *                        |  L4  |      |LShft/| Space|LGUI/ |                         | LCTL/|Enter/|RShft/|      |  L3  |
+ *                        |      |      | LALT |      |LCTL  |                         | LGUI | L1   | RALT |      |      |
+ *                        '----------------------------------'                         '----------------------------------'
  */
-    [_ADJUST] = LAYOUT(
-      _______, _______, _______,  QWERTY, _______, _______,                                              _______, _______, _______, _______,  _______, _______,
+    [_L4] = LAYOUT(
+      _______, _______, _______,      L0, _______, _______,                                              _______, _______, _______, _______,  _______, _______,
       _______, _______, _______, _______, _______, _______,                                              RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
       _______, _______, _______, _______, _______, _______,_______, _______,           _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
                                  _______, _______, _______,_______, _______,           _______, _______, _______, _______, _______
@@ -206,15 +206,15 @@ td_state_t cur_dance(qk_tap_dance_state_t *state) {
 }
 
 // Initialize tap structure associated with example tap dance key
-static td_tap_t ent_sym_tap_state = {
+static td_tap_t ent_l1_tap_state = {
     .is_press_action = true,
     .state = TD_NONE
 };
 
 // Functions that control what our tap dance key does
-void ent_sym_finished(qk_tap_dance_state_t *state, void *user_data) {
-    ent_sym_tap_state.state = cur_dance(state);
-    switch (ent_sym_tap_state.state) {
+void ent_l1_finished(qk_tap_dance_state_t *state, void *user_data) {
+    ent_l1_tap_state.state = cur_dance(state);
+    switch (ent_l1_tap_state.state) {
         case TD_SINGLE_TAP:
             tap_code(KC_ENT);
             break;
@@ -224,12 +224,12 @@ void ent_sym_finished(qk_tap_dance_state_t *state, void *user_data) {
             break;
         case TD_SINGLE_HOLD:
             // Check to see if the layer is already set
-            if (layer_state_is(_SYM)) {
+            if (layer_state_is(_L1)) {
                 // If already set, then switch it off
-                layer_off(_SYM);
+                layer_off(_L1);
             } else {
                 // If not already set, then switch the layer on
-                layer_on(_SYM);
+                layer_on(_L1);
             }
             break;
         default:
@@ -237,25 +237,25 @@ void ent_sym_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void ent_sym_reset(qk_tap_dance_state_t *state, void *user_data) {
+void ent_l1_reset(qk_tap_dance_state_t *state, void *user_data) {
     // If the key was held down and now is released then switch off the layer
-    if (ent_sym_tap_state.state == TD_SINGLE_HOLD) {
-        layer_off(_SYM);
+    if (ent_l1_tap_state.state == TD_SINGLE_HOLD) {
+        layer_off(_L1);
     }
-    if (ent_sym_tap_state.state == TD_SINGLE_TAP) {
+    if (ent_l1_tap_state.state == TD_SINGLE_TAP) {
         unregister_code16(KC_ENT);
     }
-    if (ent_sym_tap_state.state == TD_DOUBLE_TAP) {
+    if (ent_l1_tap_state.state == TD_DOUBLE_TAP) {
         unregister_code16(KC_ENT);
     }
-    ent_sym_tap_state.state = TD_NONE;
+    ent_l1_tap_state.state = TD_NONE;
 }
 
 // Associate our tap dance key with its functionality
 qk_tap_dance_action_t tap_dance_actions[] = {
-    //[ENT_SYM] = ACTION_TAP_DANCE_DOUBLE(KC_ENT, SYM),
-    //[ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ent_sym_finished, ent_sym_reset, 100), // override default tapping term
-    [ENT_SYM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ent_sym_finished, ent_sym_reset),
+    //[ENT_L1] = ACTION_TAP_DANCE_DOUBLE(KC_ENT, L1),
+    //[ENT_L1] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ent_l1_finished, ent_l1_reset, 100), // override default tapping term
+    [ENT_L1] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ent_l1_finished, ent_l1_reset),
     [LGUI_LCTL] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LCTL),
     [LCTL_LGUI] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_LGUI),
     [LSFT_LALT] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_LALT),
