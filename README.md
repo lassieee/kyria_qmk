@@ -11,14 +11,14 @@
 ![layer_0](https://i.imgur.com/UJd6L6u.jpg)
 
 
-### Layer 1: Navigation & Media
+### Layer 1: Symbols & Numbers
 
-![layer_1](https://i.imgur.com/AfzbzUf.jpg)
+![layer_1](https://i.imgur.com/dG2jCzx.jpg)
 
 
-### Layer 2: Symbols & Numbers
+### Layer 2: Navigation & Media
 
-![layer_2](https://i.imgur.com/U59Ws8Y.jpg)
+![layer_2](https://i.imgur.com/EbbTcNM.jpg)
 
 
 ### Layer 3: Function Keys

@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /app
     docker:
-      - image: docker:20.10.12-git
+      - image: docker:20.10.22-git
     parameters:
       revision:
         type: string
