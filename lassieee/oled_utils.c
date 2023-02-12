@@ -23,10 +23,7 @@ void render_layer(void) {
             oled_write_P(PSTR("Sym\n"), false);
             break;
         case _L3:
-            oled_write_P(PSTR("Function\n"), false);
-            break;
-        case _L4:
-            oled_write_P(PSTR("Adjust\n"), false);
+            oled_write_P(PSTR("Fkeys+RGB\n"), false);
             break;
         default:
             oled_write_P(PSTR("Undefined\n"), false);

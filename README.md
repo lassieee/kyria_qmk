@@ -8,22 +8,22 @@
 
 ### Layer 0: QWERTY
 
-![layer_0](https://i.imgur.com/UJd6L6u.jpg)
+![layer_0](https://i.imgur.com/fDK90NR.jpg)
 
 
 ### Layer 1: Symbols & Numbers
 
-![layer_1](https://i.imgur.com/dG2jCzx.jpg)
+![layer_1](https://i.imgur.com/fDK90NR.jpg)
 
 
 ### Layer 2: Navigation & Media
 
-![layer_2](https://i.imgur.com/EbbTcNM.jpg)
+![layer_2](https://i.imgur.com/v5YcJQc.jpg)
 
 
-### Layer 3: Function Keys
+### Layer 3: F-keys and RGB
 
-![layer_3](https://i.imgur.com/xHN6sWp.jpg)
+![layer_3](https://i.imgur.com/rlhiJm0.jpg)
 
 
 
