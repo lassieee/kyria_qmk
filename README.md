@@ -1,7 +1,4 @@
-## My Kyria keymap
-
-
-WIP - 36-keys - images not up2date
+## My 36-key Kyria keymap
 
 
 [![circleci](https://img.shields.io/circleci/build/gh/lassieee/kyria_qmk/circleci?style=flat)](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci)
@@ -10,17 +7,17 @@ WIP - 36-keys - images not up2date
 
 ### Layer 0: Base
 
-![layer_0](https://i.imgur.com/3yLvviY.png)
+![layer_0](https://i.imgur.com/Pjz9eDu.jpg)
 
 
 ### Layer 1: Symbols & Numbers
 
-![layer_1](https://i.imgur.com/KUBjUkj.png)
+![layer_1](https://i.imgur.com/8qF7I5p.jpg)
 
 
 ### Layer 2: Symbols & Numbers
 
-![layer_2](https://i.imgur.com/KUBjUkj.png)
+![layer_2](https://i.imgur.com/gDcA0zX.jpg)
 
 
 ### Layer 3: Navigation & Media
@@ -30,12 +27,12 @@ WIP - 36-keys - images not up2date
 
 ### Layer 4: Function Keys
 
-![layer_4](https://i.imgur.com/8TXUfgY.png)
+![layer_4](https://i.imgur.com/nIszD7l.jpg)
 
 
 ### Layer 5: Adjust
 
-![layer_5](https://i.imgur.com/8TXUfgY.png)
+![layer_5](https://i.imgur.com/y46LPeg.jpg)
 
 
 QMK Docs:
