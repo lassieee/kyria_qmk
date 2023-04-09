@@ -14,22 +14,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the QMK firmware
+    - name: Start QMK container
       run: docker run --platform linux/amd64 -d --rm --name qmk qmkfm/qmk_cli sleep 500
-    - name: test1
+    - name: install QMK
       run: docker exec qmk python3 -m pip install qmk
-#    - name: test2
-#      run: docker exec -it qmk qmk setup -y
-#    - name: test3
-#      run: docker exec -it qmk python3 -m pip install -r /qmk_firmware/requirements.txt
-#    - name: test4
-#      run: docker exec -it qmk qmk env
-#    - name: test5
-#      run: docker cp lassieee qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps
-#    - name: test6
-#      run: docker exec -it qmk qmk compile -kb splitkb/kyria/rev${rev} -km lassieee
-#    - name: test7
-#      run: docker cp qmk:/qmk_firmware/splitkb_kyria_rev${rev}_lassieee.hex .
-#    - name: test8
-#      run: docker stop qmk
+    - name: setup QMK
+      run: docker exec qmk qmk setup -y
+    - name: install requirements
+      run: docker exec qmk python3 -m pip install -r /qmk_firmware/requirements.txt
+    - name: display QMK env
+      run: docker exec qmk qmk env
+    - name: copy source files
+      run: docker cp lassieee qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps
+    - name: compile firmware
+      run: docker exec qmk qmk compile -kb splitkb/kyria/rev2 -km lassieee
+    - name: copy firmware from container
+      run: docker cp qmk:/qmk_firmware/splitkb_kyria_rev2_lassieee.hex .
+    - name: stop container
+      run: docker stop qmk
 
