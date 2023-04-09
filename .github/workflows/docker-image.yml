@@ -1,0 +1,35 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the QMK firmware
+      run: docker run --platform linux/amd64 -d --rm --name qmk qmkfm/qmk_cli sleep 500
+    - name: test1
+      run: docker exec -it qmk python3 -m pip install qmk
+    - name: test2
+      run: docker exec -it qmk qmk setup -y
+    - name: test3
+      run: docker exec -it qmk python3 -m pip install -r /qmk_firmware/requirements.txt
+    - name: test4
+      run: docker exec -it qmk qmk env
+    - name: test5
+      run: docker cp lassieee qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps
+    - name: test6
+      run: docker exec -it qmk qmk compile -kb splitkb/kyria/rev${rev} -km lassieee
+    - name: test7
+      run: docker cp qmk:/qmk_firmware/splitkb_kyria_rev${rev}_lassieee.hex .
+    - name: test8
+      run: docker stop qmk
+
