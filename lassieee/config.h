@@ -46,7 +46,7 @@
 // #define NO_USB_STARTUP_CHECK
 
 // How long before a tap becomes a hold. default 200
-#define TAPPING_TERM 175
+#define TAPPING_TERM 300
 
 // When using less than 8 layers
 #define LAYER_STATE_8BIT
