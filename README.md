@@ -1,5 +1,9 @@
 ## My 36-key Kyria keymap
 
+ToDo:
+- update images in README.md to reflect current layout
+- update ascii keymap layout to reflect current layout
+
 
 [![circleci](https://img.shields.io/circleci/build/gh/lassieee/kyria_qmk/circleci?style=flat)](https://circleci.com/gh/lassieee/kyria_qmk/tree/circleci)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
