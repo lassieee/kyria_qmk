@@ -46,11 +46,11 @@ enum {
 };
 
 // Function associated with all tap dances
-td_state_t cur_dance(qk_tap_dance_state_t *state);
+td_state_t cur_dance(tap_dance_state_t *state);
 
 // Functions associated with individual tap dances
-void ent_l1_finished(qk_tap_dance_state_t *state, void *user_data);
-void ent_l1_reset(qk_tap_dance_state_t *state, void *user_data);
+void ent_l1_finished(tap_dance_state_t *state, void *user_data);
+void ent_l1_reset(tap_dance_state_t *state, void *user_data);
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_L1] = LAYOUT(
      KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_EQL,
-     KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                               KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PLUS,
+     KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                               KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_KP_PLUS,
      KC_PIPE, KC_BSLS, KC_COLN, KC_SCLN, KC_MINS, KC_LBRC, _______, _______,           _______, _______, KC_RBRC, KC_UNDS, KC_COMM,  KC_DOT, KC_SLSH, KC_QUES,
                                 _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______
     ),
@@ -177,7 +177,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 // Determine the current tap dance state
-td_state_t cur_dance(qk_tap_dance_state_t *state) {
+td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (!state->pressed) return TD_SINGLE_TAP;
         else return TD_SINGLE_HOLD;
@@ -192,7 +192,7 @@ static td_tap_t ent_l1_tap_state = {
 };
 
 // Functions that control what our tap dance key does
-void ent_l1_finished(qk_tap_dance_state_t *state, void *user_data) {
+void ent_l1_finished(tap_dance_state_t *state, void *user_data) {
     ent_l1_tap_state.state = cur_dance(state);
     switch (ent_l1_tap_state.state) {
         case TD_SINGLE_TAP:
@@ -217,7 +217,7 @@ void ent_l1_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void ent_l1_reset(qk_tap_dance_state_t *state, void *user_data) {
+void ent_l1_reset(tap_dance_state_t *state, void *user_data) {
     // If the key was held down and now is released then switch off the layer
     if (ent_l1_tap_state.state == TD_SINGLE_HOLD) {
         layer_off(_L1);
@@ -232,7 +232,7 @@ void ent_l1_reset(qk_tap_dance_state_t *state, void *user_data) {
 }
 
 // Associate our tap dance key with its functionality
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     //[ENT_L1] = ACTION_TAP_DANCE_DOUBLE(KC_ENT, L1),
     //[ENT_L1] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ent_l1_finished, ent_l1_reset, 100), // override default tapping term
     [ENT_L1] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ent_l1_finished, ent_l1_reset),

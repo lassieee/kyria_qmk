@@ -26,7 +26,7 @@
 #    define RGBLIGHT_HUE_STEP  8
 #    define RGBLIGHT_SAT_STEP  8
 #    define RGBLIGHT_VAL_STEP  8
-#    define RGBLIGHT_LIMIT_VAL 150
+#    define RGBLIGHT_LIMIT_VAL 128
 #    define RGBLIGHT_EFFECT_BREATHING
 #    define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #    define RGBLIGHT_EFFECT_RAINBOW_SWIRL
@@ -39,14 +39,19 @@
 #endif
 
 // Lets you roll mod-tap keys
-#define IGNORE_MOD_TAP_INTERRUPT
+// no longer needed since it's the default
+// #define IGNORE_MOD_TAP_INTERRUPT
 
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
-// #define SPLIT_USB_DETECT
-// #define NO_USB_STARTUP_CHECK
+#define SPLIT_USB_DETECT
+#define NO_USB_STARTUP_CHECK
 
 // How long before a tap becomes a hold. default 200
 #define TAPPING_TERM 175
 
 // When using less than 8 layers
 #define LAYER_STATE_8BIT
+
+// Setting handedness (assumes left main)
+//#define SPLIT_HAND_PIN B7
+// #define MASTER_LEFT
