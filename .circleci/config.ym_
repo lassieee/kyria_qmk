@@ -16,21 +16,19 @@ jobs:
           command: |
             export
             cd /app;
-            docker run -d --rm --name qmk qmkfm/qmk_cli sleep 300;
-            docker exec -it qmk python3 -m pip install qmk
+            docker run -d --rm --name qmk ghr.io/qmk/qmk_cli sleep 300;
             docker exec -it qmk qmk setup -y
-            docker exec -it qmk python3 -m pip install -r /qmk_firmware/requirements.txt
             docker exec -it qmk qmk env
             docker cp lassieee qmk:qmk_firmware/keyboards/splitkb/kyria/keymaps/
             docker exec -it qmk qmk compile -kb splitkb/kyria/<< parameters.revision>> -km lassieee
-            docker cp qmk:/qmk_firmware/splitkb_kyria_<< parameters.revision >>_lassieee.hex .
+            docker cp qmk:/qmk_firmware/splitkb_kyria_<< parameters.revision >>_base_lassieee.hex .
             docker stop qmk
       - store_artifacts:
-          path: /app/splitkb_kyria_rev2_lassieee.hex
+          path: /app/splitkb_kyria_rev2_base_lassieee.hex
       - persist_to_workspace:
           root: /app
           paths:
-            - splitkb_kyria_rev2_lassieee.hex
+            - splitkb_kyria_rev2_base_lassieee.hex
 
   publish:
     docker:
@@ -59,4 +57,3 @@ workflows:
           filters:
             tags:
               only: /^\d+\-\d+\-\d+\.\d+$/
-
